@@ -332,4 +332,44 @@ rosrun rqt_mypkg rqt_mypkg
 ```
 
 ## Make your own .ui file
-Using qtdesigner, make a plain widget. 
+Using qtdesigner, make a plain widget. Follow this [link](http://wiki.ros.org/python_qt_binding) to learn about Qt Widget python binding
+
+### Reusing widget/GUI in .ui
+Why do we have to recreate all widget if we could reuse the widget inside another widget by just referencing it. This will save time and me it more modular. Follow this [link](http://wiki.ros.org/rqt/Tutorials/Using%20.ui%20file%20in%20rqt%20plugin)
+
+#### Inside the .ui file
+To add another widget and reuse them, you simply add the widget class you want
+```
+<widget class="TopicWidget" name="_widget_topic" native="true">
+  <property name="enabled">
+  :
+</widget>
+```
+
+BUT THEN at the end of your .ui file, you have to add this customwidget tag to tell that this is extension and where to find it
+```
+ <customwidgets>
+  <customwidget>
+    <class>TopicWidget</class>
+    <extends>QWidget</extends>
+    <header>rqt_topic.topic_widget</header>
+  </customwidget>
+ </customwidgets>
+```
+
+#### Inside my_module.py file (or the script file)
+now you need to import whatever widget you use
+```
+from rqt_topic.topic_widget import TopicWidget
+```
+and tell rqt the custom class you use
+```
+loadUi(ui_file, self, {'TopicWidget': TopicWidget})
+```
+and reference tehm in self
+```
+self._widget_topic.set_selected_topics(self._selected_topics)
+```
+
+#### What you should do
+All this is a bit complicated, best way is to just copy and paste then modify existing .ui and script from [here](https://github.com/ros-visualization/rqt_common_plugins/tree/51cef97fa059e68b9756058956db0f2f6ff8934f)
