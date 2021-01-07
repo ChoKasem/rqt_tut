@@ -7,7 +7,7 @@ clone this package into the src of the workspace
     - MyPlugin.ui
 - script
     - rqt_mypkg.py
--src/my_mypkg
+- src/my_mypkg
     - \_\_init__.py
     - my_module.py
 - CMakeLists.txt
