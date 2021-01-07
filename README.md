@@ -1,5 +1,8 @@
-# rqt_mypkg
-Trying to make sense of [Create your new rqt plugin](http://wiki.ros.org/rqt/Tutorials/Create%20your%20new%20rqt%20plugin#Install_.26_Run_your_plugin) from ROS rQT Tutorials which is missing a lot of pieces. Will update the wiki soon. Much of this is from [Lucas Walter's rqt_mypkg implementation](https://github.com/lucasw/rqt_mypkg/tree/master/rqt_example_py)
+# How to Create Custom RQT Plugin for Dummies
+[Create your new rqt plugin](http://wiki.ros.org/rqt/Tutorials/Create%20your%20new%20rqt%20plugin#Install_.26_Run_your_plugin) from ROS rQT Tutorials which is missing a lot of pieces. 
+Much of this is from [Lucas Walter's rqt_mypkg implementation](https://github.com/lucasw/rqt_mypkg/tree/master/rqt_example_py) and [How-Chen](https://github.com/how-chen/rqt_mypkg)
+
+To see some of complete examples, go [here](https://github.com/ros-visualization/rqt_common_plugins/tree/bd5efbb4f4f2e8ca40e54725e674e7ac5afdd0ba)
 
 ## Executing this program: 
 Follow this if only this git repo have the desire Plugin, if not, follow the instruction below it about how to Create Custom Plugin
