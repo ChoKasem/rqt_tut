@@ -1,12 +1,15 @@
 # How to Create Custom RQT Plugin for Dummies
 
-## Link to official tutorial and other useful link
+## Link to official tutorial and other useful resources
 [Create your new rqt plugin](http://wiki.ros.org/rqt/Tutorials/Create%20your%20new%20rqt%20plugin#Install_.26_Run_your_plugin) from ROS RQT Tutorials which is missing a lot of pieces. 
 Much of this is from [Lucas Walter's rqt_mypkg implementation](https://github.com/lucasw/rqt_mypkg/tree/master/rqt_example_py) and [How-Chen](https://github.com/how-chen/rqt_mypkg)
 
 [Python QT Tutorial](http://wiki.ros.org/python_qt_binding) for when you want to create plugin with QT
 
 To see some of complete rqt plugin examples, go [here](https://github.com/ros-visualization/rqt_common_plugins/tree/bd5efbb4f4f2e8ca40e54725e674e7ac5afdd0ba)
+
+Creating Qt using Qt Designer example can be seen in this book, book is to big, so use your favorite site to download it: __Learning Robotics using Python: Design, simulate, program, and prototype an autonomous mobile robot using ROS, OpenCV, PCL, and Python__
+
 
 ## Overview Code Structure
 
@@ -359,7 +362,7 @@ In a new terminal window
 rosrun rqt_mypkg rqt_mypkg
 ```
 
-## Make your own .ui file
+## First Method: Make your own .ui file
 Using qtdesigner, make a plain widget. Follow this [link](http://wiki.ros.org/python_qt_binding) to learn about Qt Widget python binding
 
 ### Reusing widget/GUI in .ui
@@ -401,3 +404,63 @@ self._widget_topic.set_selected_topics(self._selected_topics)
 
 #### What you should do
 All this is a bit complicated, best way is to just copy and paste then modify existing .ui and script from [here](https://github.com/ros-visualization/rqt_common_plugins/tree/51cef97fa059e68b9756058956db0f2f6ff8934f)
+
+
+## Second Method: Using Qt Designer to Create Custom Plugin
+This part refer to the book in the top of this readme
+Download Qt with this command
+```
+sudo apt-get install python-qt4 pyqt4-dev-tools
+```
+An alternative to Qt is PySide, which can be download with the following command
+```
+sudo apt-get install python-pyside pyside-tools
+```
+
+Use Qt Designer to create your plugin. There you can create button, etc, and specify what signal it send when press, hold, etc.
+
+After you have a .ui file from the designer, you can convert it to python file with the following command for PyQt and PySlide (they are almost equivalent)
+
+For PyQt:
+```
+$ pyuic4 -x hello_world.ui -o hello_world.py
+```
+For PySlide:
+```
+$ pyside-uic -x hello_world.ui -o hello_world.py
+```
+
+It will looks like this:
+```
+from PyQt4 import QtCore, QtGui
+try:
+  _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+  _fromUtf8 = lambda s: s
+class Ui_Form(object):
+  def setupUi(self, Form):
+    Form.setObjectName(_fromUtf8("Form"))
+    Form.resize(514, 355)
+    self.pushButton = QtGui.QPushButton(Form)
+    self.pushButton.setGeometry(QtCore.QRect(150, 80, 191, 61))
+    self.pushButton.setObjectName(_fromUtf8("pushButton"))
+    self.retranslateUi(Form)
+    QtCore.QObject.connect(self.pushButton,
+    QtCore.SIGNAL(_fromUtf8("clicked()")), Form.message)
+    QtCore.QMetaObject.connectSlotsByName(Form)
+
+  def retranslateUi(self, Form):
+    Form.setWindowTitle(QtGui.QApplication.translate("Form", "Form",
+    None, QtGui.QApplication.UnicodeUTF8))
+    self.pushButton.setText( QtGui.QApplication.translate("Form",
+    "Press", None, QtGui.QApplication.UnicodeUTF8))
+    #This following code should be added manually
+if __name__ == "__main__":
+  import sys
+    app = QtGui.QApplication(sys.argv)
+    Form = QtGui.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
+```
