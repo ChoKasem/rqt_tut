@@ -1,8 +1,33 @@
 # How to Create Custom RQT Plugin for Dummies
-[Create your new rqt plugin](http://wiki.ros.org/rqt/Tutorials/Create%20your%20new%20rqt%20plugin#Install_.26_Run_your_plugin) from ROS rQT Tutorials which is missing a lot of pieces. 
+
+## Link to official tutorial and other useful link
+[Create your new rqt plugin](http://wiki.ros.org/rqt/Tutorials/Create%20your%20new%20rqt%20plugin#Install_.26_Run_your_plugin) from ROS RQT Tutorials which is missing a lot of pieces. 
 Much of this is from [Lucas Walter's rqt_mypkg implementation](https://github.com/lucasw/rqt_mypkg/tree/master/rqt_example_py) and [How-Chen](https://github.com/how-chen/rqt_mypkg)
 
-To see some of complete examples, go [here](https://github.com/ros-visualization/rqt_common_plugins/tree/bd5efbb4f4f2e8ca40e54725e674e7ac5afdd0ba)
+[Python QT Tutorial](http://wiki.ros.org/python_qt_binding) for when you want to create plugin with QT
+
+To see some of complete rqt plugin examples, go [here](https://github.com/ros-visualization/rqt_common_plugins/tree/bd5efbb4f4f2e8ca40e54725e674e7ac5afdd0ba)
+
+## Overview Code Structure
+
+* workspace
+  * build
+  * devel
+  * src/rqt
+    * rqt_mypkg
+      * resource
+        * MyPlugin.ui
+      * scripts
+        * rqt_mypkg
+      * src/rqt_mypkg
+        * __init\__.py
+        * my_module.py
+      * CMakeLists.txt
+      * package.xml
+      * plugin.xml
+      * setup.py
+
+
 
 ## Executing this program: 
 Follow this if only this git repo have the desire Plugin, if not, follow the instruction below it about how to Create Custom Plugin
@@ -11,6 +36,9 @@ Follow this if only this git repo have the desire Plugin, if not, follow the ins
 % cd [catkin workspace]/src
 ```
 then clone this directory
+```
+% git clone https://github.com/ChoKasem/rqt_tut.git
+```
 
 if it doesn't work, use the following directory instead as a starter
 ```
