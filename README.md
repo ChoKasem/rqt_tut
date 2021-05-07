@@ -31,6 +31,12 @@ Creating Qt using Qt Designer example can be seen in this book, book is to big, 
       * setup.py
 
 
+## Summary of How to Create Custom Plugin / Dashboard
+
+There are 3 main ways
+1. Can just create everything from scratch by yourself (how the GUI will look ie buttons and stuff, how ). This will all be programming (so you program where to place the box like in javascript, also program interaction)
+2. Use Qt Desginer to help design the GUI and interaction (what it will do when I press the button). Then convert it to python code later.
+3. If you like RQT(ROS QT) and just want to combine them, could just run: " rosrun rqt_gui rqt_gui " Then pick whatever rqt plugin (or your own plugin is possible too I think) and drag them down to dashboard.
 
 ## Executing this program: 
 Follow this if only this git repo have the desire Plugin, if not, follow the instruction below it about how to Create Custom Plugin
